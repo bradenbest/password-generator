@@ -4,14 +4,20 @@
 
 #include "password.h"
 
-int main(int argc, char **argv)
+#define DEFAULT_LENGTH 4
+
+int
+main(int argc, char **argv)
 {
-  srand(time(0));
-  int len = 4;
-  if(argc > 1)
-    len = atoi(argv[1]);
+    int len = DEFAULT_LENGTH;
+  
+    srand(time(0));
+  
+    if(argv[1])
+        if((len = atoi(argv[1])) < 1)
+            len = DEFAULT_LENGTH;
+  
+    printf("Password generated: %s\n", gen_password(len));
 
-  printf("Password generated: %s\n", gen_password(len));
-
-  return 0;
+    return 0;
 }
